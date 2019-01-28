@@ -165,6 +165,10 @@ static MouseShortcut mshortcuts[] = {
 	{ Button5,              XK_ANY_MOD,     "\005" },
 };
 
+static char *openurlcmd[] = { "/bin/sh", "-c",
+        "xurls | uniq | dmenu -l 10 | xargs -r xdg-open",
+        "externalpipe", NULL };
+
 /* Internal keyboard shortcuts. */
 #define MODKEY Mod1Mask
 #define TERMMOD (ControlMask|ShiftMask)
@@ -183,7 +187,7 @@ static Shortcut shortcuts[] = {
 	{ TERMMOD,              XK_Y,           selpaste,       {.i =  0} },
 	{ ShiftMask,            XK_Insert,      selpaste,       {.i =  0} },
 	{ TERMMOD,              XK_Num_Lock,    numlock,        {.i =  0} },
-	{ TERMMOD,              XK_D,           externalpipe,   { .v = openurlcmd } },
+    { TERMMOD,              XK_D,           externalpipe,   {.v = openurlcmd} },
 };
 
 /*
@@ -467,6 +471,3 @@ static char ascii_printable[] =
 	"@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_"
 	"`abcdefghijklmnopqrstuvwxyz{|}~";
 
-static char *openurlcmd[] = { "bin/sh", "-c",
-        "xurls | dmenu -1 10 -w -$WINDOWID | xargs -r open",
-        "externalpipe", NULL };
